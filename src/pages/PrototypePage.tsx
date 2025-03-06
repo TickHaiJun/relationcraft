@@ -47,15 +47,16 @@ const PrototypePage: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 justify-items-center">
           {pages.map((page) => (
-            <div key={page.path} className="flex flex-col items-center w-full max-w-xs">
+            <div key={page.path} className="flex flex-col items-center w-full max-w-[280px]">
               <div 
-                className="border-8 rounded-[40px] border-black overflow-hidden shadow-xl bg-gray-800 aspect-[9/19] relative cursor-pointer transition-transform hover:scale-105"
+                className="border-8 rounded-[40px] border-black overflow-hidden shadow-xl bg-gray-800 aspect-[9/19] w-full relative cursor-pointer transition-transform hover:scale-105"
                 onClick={() => handlePreviewClick(page.path)}
               >
                 <iframe 
                   src={page.path} 
-                  className="w-full h-full pointer-events-none"
+                  className="w-full h-full pointer-events-none scale-[0.99]"
                   title={page.name}
+                  loading="lazy"
                 />
                 <Link 
                   to={page.path}
@@ -74,11 +75,11 @@ const PrototypePage: React.FC = () => {
       {/* Enlarged preview modal */}
       {activePreview && (
         <div 
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
           onClick={closePreview}
         >
           <div 
-            className="relative max-w-sm w-full h-[80vh] bg-white rounded-[40px] border-8 border-black overflow-hidden shadow-2xl"
+            className="relative max-w-md w-full h-[80vh] max-h-[800px] bg-white rounded-[40px] border-8 border-black overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe 
