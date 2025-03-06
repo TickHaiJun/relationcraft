@@ -1,85 +1,58 @@
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import PhoneFrame from '@/components/PhoneFrame';
-import { Button } from '@/components/ui/button';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-
-// Pages components
-import Welcome from './Welcome';
-import Login from './Login';
-import SwipePage from './SwipePage';
-import MatchesPage from './MatchesPage';
-import MessagesPage from './MessagesPage';
-import ChatPage from './ChatPage';
-import ProfilePage from './ProfilePage';
-import EditProfilePage from './EditProfilePage';
-import SettingsPage from './SettingsPage';
+import { Button } from '@/components/ui/button';
 
 const PrototypePage: React.FC = () => {
-  const navigate = useNavigate();
-  
+  const pages = [
+    { path: "/welcome", name: "欢迎页面" },
+    { path: "/login", name: "登录页面" },
+    { path: "/swipe", name: "发现页面" },
+    { path: "/matches", name: "喜欢页面" },
+    { path: "/messages", name: "消息页面" },
+    { path: "/chat/1", name: "聊天页面" },
+    { path: "/profile", name: "我的页面" },
+    { path: "/edit-profile", name: "编辑资料页面" },
+    { path: "/settings", name: "设置页面" },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <Button 
-            variant="outline" 
-            size="icon" 
-            onClick={() => navigate('/')}
-            className="rounded-full"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
+        <div className="flex items-center mb-8">
+          <Link to="/">
+            <Button variant="ghost" className="flex items-center gap-2">
+              <ArrowLeft className="h-5 w-5" />
+              返回首页
+            </Button>
+          </Link>
           
-          <h1 className="text-3xl font-bold">恋遇 App 原型</h1>
+          <h1 className="text-3xl font-bold text-center flex-1">恋遇 App 原型</h1>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">欢迎页</h2>
-            <Welcome />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">登录页</h2>
-            <Login />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">发现页</h2>
-            <SwipePage />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">喜欢页</h2>
-            <MatchesPage />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">消息列表页</h2>
-            <MessagesPage />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">聊天详情页</h2>
-            <ChatPage />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">个人资料页</h2>
-            <ProfilePage />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">编辑资料页</h2>
-            <EditProfilePage />
-          </div>
-          
-          <div className="flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">设置页</h2>
-            <SettingsPage />
-          </div>
+
+        <p className="text-app-subtle mb-8 text-center">
+          以下是所有页面的原型预览，点击任意页面可查看全屏效果
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+          {pages.map((page) => (
+            <div key={page.path} className="flex flex-col items-center w-full max-w-xs">
+              <Link 
+                to={page.path} 
+                className="block w-full transition-transform hover:scale-105"
+              >
+                <div className="border-8 rounded-[40px] border-black overflow-hidden shadow-xl bg-gray-800 aspect-[9/19] relative">
+                  <iframe 
+                    src={page.path} 
+                    className="w-full h-full pointer-events-none"
+                    title={page.name}
+                  />
+                </div>
+              </Link>
+              <p className="mt-4 font-medium text-lg text-center">{page.name}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
