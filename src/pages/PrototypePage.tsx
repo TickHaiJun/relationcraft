@@ -28,8 +28,8 @@ const PrototypePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gray-100 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 py-6 md:px-6">
         <div className="flex items-center mb-8">
           <Link to="/">
             <Button variant="ghost" className="flex items-center gap-2">
@@ -38,35 +38,36 @@ const PrototypePage: React.FC = () => {
             </Button>
           </Link>
           
-          <h1 className="text-3xl font-bold text-center flex-1">恋遇 App 原型</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-center flex-1">恋遇 App 原型</h1>
         </div>
 
         <p className="text-app-subtle mb-8 text-center">
           以下是所有页面的原型预览，点击任意页面可放大查看，点击外部链接可全屏查看
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 justify-items-center">
           {pages.map((page) => (
-            <div key={page.path} className="flex flex-col items-center w-full max-w-[280px]">
+            <div key={page.path} className="flex flex-col items-center w-full max-w-[250px]">
               <div 
-                className="border-8 rounded-[40px] border-black overflow-hidden shadow-xl bg-gray-800 aspect-[9/19] w-full relative cursor-pointer transition-transform hover:scale-105"
+                className="border-[6px] md:border-8 rounded-[30px] md:rounded-[40px] border-black overflow-hidden shadow-xl bg-gray-800 aspect-[9/19] w-full relative cursor-pointer transition-transform hover:scale-105"
                 onClick={() => handlePreviewClick(page.path)}
               >
                 <iframe 
                   src={page.path} 
-                  className="w-full h-full pointer-events-none scale-[0.99]"
+                  className="w-full h-full pointer-events-none scale-[0.99] transform-gpu"
                   title={page.name}
                   loading="lazy"
+                  scrolling="no"
                 />
                 <Link 
                   to={page.path}
-                  className="absolute top-3 right-3 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors z-10"
+                  className="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full shadow-md hover:bg-white transition-colors z-10"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <ExternalLink className="h-4 w-4 text-gray-800" />
+                  <ExternalLink className="h-3 w-3 md:h-4 md:w-4 text-gray-800" />
                 </Link>
               </div>
-              <p className="mt-4 font-medium text-lg text-center">{page.name}</p>
+              <p className="mt-3 font-medium text-base md:text-lg text-center">{page.name}</p>
             </div>
           ))}
         </div>
@@ -79,13 +80,14 @@ const PrototypePage: React.FC = () => {
           onClick={closePreview}
         >
           <div 
-            className="relative max-w-md w-full h-[80vh] max-h-[800px] bg-white rounded-[40px] border-8 border-black overflow-hidden shadow-2xl"
+            className="relative w-[320px] md:w-[375px] h-[85vh] max-h-[800px] bg-white rounded-[40px] border-8 border-black overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe 
               src={activePreview} 
               className="w-full h-full"
               title="Enlarged Preview"
+              scrolling="no"
             />
             <button 
               className="absolute top-4 right-4 bg-black/80 text-white p-2 rounded-full hover:bg-black"
