@@ -1,8 +1,14 @@
-import { useLocation } from "react-router-dom";
+
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import PhoneFrame from "@/components/PhoneFrame";
+import { Home } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.error(
@@ -12,15 +18,24 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+    <PhoneFrame>
+      <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+        <div className="w-20 h-20 bg-app-gray rounded-full flex items-center justify-center mb-6">
+          <span className="text-3xl font-bold text-app-primary">404</span>
+        </div>
+        
+        <h1 className="text-2xl font-bold mb-2">页面不存在</h1>
+        <p className="text-app-subtle mb-8">抱歉，您要找的页面不存在或已被移除。</p>
+        
+        <Button 
+          onClick={() => navigate('/')}
+          className="rounded-full px-6 py-5 bg-app-primary hover:bg-app-primary/90 flex items-center gap-2"
+        >
+          <Home className="h-5 w-5" />
+          返回首页
+        </Button>
       </div>
-    </div>
+    </PhoneFrame>
   );
 };
 
