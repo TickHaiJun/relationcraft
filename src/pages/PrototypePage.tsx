@@ -47,7 +47,7 @@ const PrototypePage: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 justify-items-center">
           {pages.map((page) => (
-            <div key={page.path} className="flex flex-col items-center w-full max-w-[250px]">
+            <div key={page.path} className="flex flex-col items-center w-full">
               <div 
                 className="border-[6px] md:border-8 rounded-[30px] md:rounded-[40px] border-black overflow-hidden shadow-xl bg-gray-800 aspect-[9/19] w-full relative cursor-pointer transition-transform hover:scale-105"
                 onClick={() => handlePreviewClick(page.path)}
